@@ -1,0 +1,54 @@
+# PathPlanner_YPLAN CMake config file
+#
+# This file sets the following variables:
+# PathPlanner_YPLAN_FOUND - Always TRUE.
+# PathPlanner_YPLAN_INCLUDE_DIRS - Directories containing the PathPlanner_YPLAN include files.
+# PathPlanner_YPLAN_IDL_DIRS - Directories containing the PathPlanner_YPLAN IDL files.
+# PathPlanner_YPLAN_LIBRARIES - Libraries needed to use PathPlanner_YPLAN.
+# PathPlanner_YPLAN_DEFINITIONS - Compiler flags for PathPlanner_YPLAN.
+# PathPlanner_YPLAN_VERSION - The version of PathPlanner_YPLAN found.
+# PathPlanner_YPLAN_VERSION_MAJOR - The major version of PathPlanner_YPLAN found.
+# PathPlanner_YPLAN_VERSION_MINOR - The minor version of PathPlanner_YPLAN found.
+# PathPlanner_YPLAN_VERSION_REVISION - The revision version of PathPlanner_YPLAN found.
+# PathPlanner_YPLAN_VERSION_CANDIDATE - The candidate version of PathPlanner_YPLAN found.
+
+message(STATUS "Found PathPlanner_YPLAN-@PROJECT_VERSION@")
+set(PathPlanner_YPLAN_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(PathPlanner_YPLAN_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(PathPlanner_YPLAN_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(PathPlanner_YPLAN_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(PathPlanner_YPLAN_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(PathPlanner_YPLAN_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(PathPlanner_YPLAN_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(PathPlanner_YPLAN_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(PathPlanner_YPLAN_VERSION @PROJECT_VERSION@)
+set(PathPlanner_YPLAN_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(PathPlanner_YPLAN_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(PathPlanner_YPLAN_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(PathPlanner_YPLAN_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
